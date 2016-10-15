@@ -69,6 +69,7 @@ public class CrashBoomBang extends Application {
         
         //Create a canvas that defines the size of the page
         final Canvas canvas = new Canvas (W, H);
+        
         Button btnCr = new Button();
         Button btnBo = new Button();
         Button btnBa = new Button();
@@ -132,10 +133,17 @@ public class CrashBoomBang extends Application {
         
         
         StackPane root = new StackPane();
-        //root.getChildren().add(btn);
+        
+        //formatting the text objects
         crash.setPosition(100, 150);
         boom.setPosition(300, 350);
         bang.setPosition(200, 200);
+        crash.fontProperty().set(Font.font("Copperplate",30));
+        boom.fontProperty().set(Font.font("Castellar",30));
+        bang.fontProperty().set(Font.font("Stencil",30));
+        boom.setFill(Color.RED);
+        crash.setFill(Color.BLUE);
+
         
         //Horrible manual button position setting
         btnCr.setTranslateX(-(W/2) + 50);
@@ -177,7 +185,7 @@ public class CrashBoomBang extends Application {
         //Define the size of the whole thing
         Scene scene = new Scene(root, W, H);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Crash Boom Bang");
         primaryStage.setScene(scene);
         primaryStage.show();
         timer.start();

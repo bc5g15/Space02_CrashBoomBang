@@ -9,6 +9,8 @@ package crashboombang;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.geometry.Point2D;
+import java.util.Random;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -84,6 +86,14 @@ public class ForceText extends Text {
         this.velX += (target.mySpeed() *(xForce/hypotenuse))/2;
         this.velY += (target.mySpeed() * (yForce/hypotenuse))/2;
         
+        //Very Gimmicky. Update the colour of the colling object
+        Random rnd = new Random();
+        int r = rnd.nextInt(256);
+        int g = rnd.nextInt(256);
+        int b = rnd.nextInt(256);
+        
+        this.setFill(Color.rgb(r, g, b));
+        
         target.updatePosition();
         this.updatePosition();
     }
@@ -129,13 +139,13 @@ public class ForceText extends Text {
             //velX = -velX;
             if(getPosX() > W)
             {
-                this.setPosition(W, this.getPosY());
-                velX = -Math.abs(velX * 0.9);
+                this.setPosition(W-width/2, this.getPosY());
+                velX = -Math.abs(velX *0.9);
             }
-            else
+            else if(getPosX() <0)
             {
-                this.setPosition(0, this.getPosY());
-                velX = Math.abs(velX * 0.9);
+                this.setPosition(width/2, this.getPosY());
+                velX = Math.abs(velX *0.9);
             }
         }
 
@@ -145,16 +155,16 @@ public class ForceText extends Text {
         {
             //velY = -velY;
             //this.setTranslateY(H+this.height);
-            if(getPosY() >= H)
+            if(getPosY() > H)
             {
                 this.setPosition(this.getPosX(), H);
                 //Readjust speed to prevent permanant bouncing
                 velY = -Math.abs(velY * 0.9);
             }
-            else
+            else if(getPosY()<0)
             {
-                this.setPosition(this.getPosX(), this.height/4);
-                velY = Math.abs(velY * 0.99);
+                this.setPosition(this.getPosX(), this.height/2);
+                velY = Math.abs(velY * 0.9);
                 //System.out.println(velY);
             }
                     
